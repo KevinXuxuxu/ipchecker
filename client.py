@@ -22,7 +22,7 @@ def main():
     ipf.write(p[0])
     ipf.close()
 
-    server_addr = "http://"+config['server']+":"+config['port']
+    server_addr = "http://"+config['server']+":"+str(config['port'])
     requests.post(server_addr, json={config['machine_name']: p[0]})
 
 if __name__ == "__main__":
