@@ -31,4 +31,4 @@ def main():
 if __name__ == "__main__":
     while(1):
         main()
-        time.sleep(600)
+        time.sleep(config["timeout"])

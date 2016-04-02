@@ -1,1 +1,1 @@
-{"server": "your server ip", "port": 8080, "machine_name": "your client name"}
+{"server": "your server ip", "port": 8080, "machine_name": "your client name", "timeout": 180}
