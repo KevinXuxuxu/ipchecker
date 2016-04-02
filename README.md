@@ -11,3 +11,7 @@ Some features are to be added to this software, including
 - Automatic launch of clients on portable machines.
 
 - Maintainer of host file which should update host file according to server.
+
+- Security issues.
+
+___Warning: For now the software is just a prototype without any security measure. Use it on your own risk!___
