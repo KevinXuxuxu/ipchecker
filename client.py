@@ -1,6 +1,11 @@
 import re
 import os
 import time
+import json
+import requests
+
+# necessary keys in config: server, port, machine_name
+config = json.load(open("config.json"))
 
 def main():
     os.system("rm ifconfig.out")
@@ -16,9 +21,9 @@ def main():
     ipf = open("ip.out", 'w')
     ipf.write(p[0])
     ipf.close()
-    # os.system("git add .")
-    # os.system("git commit -am update")
-    # os.system("git push")
+
+    server_addr = "http://"+config['server']+":"+config['port']
+    requests.post(server_addr, json={config['machine_name']: p[0]})
 
 if __name__ == "__main__":
     while(1):
