@@ -14,4 +14,4 @@ Some features are to be added to this software, including
 
 - Security issues.
 
-___Warning: For now the software is just a prototype without any security measure. Use it on your own risk!___
+___Warning: For now the software is just a prototype without any security measure. Use it at your own risk!___
