@@ -6,9 +6,10 @@ import requests
 
 # necessary keys in config: server, port, machine_name
 config = json.load(open("config.json"))
-old_p = ""
+old_p = "whatever"
 
 def main():
+    global old_p
     os.system("rm ifconfig.out")
     os.system("ifconfig ppp0 | cat >> ifconfig.out")
     os.system("ifconfig en0 | cat >> ifconfig.out")
