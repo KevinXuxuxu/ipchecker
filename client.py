@@ -6,6 +6,7 @@ import requests
 
 # necessary keys in config: server, port, machine_name
 config = json.load(open("config.json"))
+old_p = ""
 
 def main():
     os.system("rm ifconfig.out")
@@ -23,7 +24,9 @@ def main():
     ipf.close()
 
     server_addr = "http://"+config['server']+":"+str(config['port'])
-    requests.post(server_addr, json={config['machine_name']: p[0]})
+    if old_p != p[0]:
+        requests.post(server_addr, json={config['machine_name']: p[0]})
+        old_p = p[0]
 
 if __name__ == "__main__":
     while(1):
