@@ -12,6 +12,7 @@ def main():
     global old_p
     os.system("rm ifconfig.out")
     os.system("ifconfig ppp0 | cat >> ifconfig.out")
+    os.system("ifconfig ppp1 | cat >> ifconfig.out")
     os.system("ifconfig en0 | cat >> ifconfig.out")
     os.system("ifconfig en1 | cat >> ifconfig.out")
     os.system("ifconfig en2 | cat >> ifconfig.out")
@@ -19,6 +20,8 @@ def main():
     s = f.read(100000)
     p = re.findall(re.compile("[0-9]*\.[0-9]*\.[0-9]*\.[0-9]*"), s)
     f.close()
+    os.system("ifconfig | cat > ifconfig.out")
+    ifconfig = open("ifconfig.out").read(100000)
     os.system("rm ip.out")
     ipf = open("ip.out", 'w')
     ipf.write(p[0])
@@ -26,10 +29,13 @@ def main():
 
     server_addr = "http://"+config['server']+":"+str(config['port'])
     if old_p != p[0]:
-        requests.post(server_addr, json={config['machine_name']: p[0]})
+        requests.post(server_addr, data=json.dumps({config['machine_name']: {"ip": p[0], "if": ifconfig}})
         old_p = p[0]
 
 if __name__ == "__main__":
     while(1):
-        main()
-        time.sleep(config["timeout"])
+        try:
+            main()
+            time.sleep(config["timeout"])
+        except Exception as e:
+            pass

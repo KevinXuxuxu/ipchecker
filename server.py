@@ -1,5 +1,6 @@
 import web
 import json
+import re
         
 urls = (
 	'/(.*)', 'hello'
@@ -19,14 +20,19 @@ def write_in(dict, file_name):
 	f.close()
 
 class hello:        
-	def GET(self, name):
-		if not name: 
-			return json.load(open('db.out'))
+	def GET(self, route):
+		data = web.input()
+		db = json.load(open("db.out"))
+		if not route: 
+			return db
 		else:
-			try:
-				return json.load(open('db.out'))[name]
-			except Exception as e:
-				return "No such machine in the list."
+			parsed = re.split('/', route)
+			name = parsed[0]
+			if len(parsed) == 1:
+				return db[name]
+			else:
+				attr = parsed[2]
+				return db[name][attr]
 	def POST(self, data):
 		dict = json.loads(web.data())
 		write_in(dict, 'db.out')
