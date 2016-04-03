@@ -29,10 +29,16 @@ class hello:
 			parsed = re.split('/', route)
 			name = parsed[0]
 			if len(parsed) == 1:
-				return db[name]
+				try:
+					return db[name]
+				except Exception as e:
+					return "No such machine."
 			else:
-				attr = parsed[2]
-				return db[name][attr]
+				try:
+					attr = parsed[1]
+					return db[name][attr]
+				except Exception as e:
+					return "No such attribute."
 	def POST(self, data):
 		dict = json.loads(web.data())
 		write_in(dict, 'db.out')
