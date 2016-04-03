@@ -28,7 +28,7 @@ class hello:
 		else:
 			parsed = re.split('/', route)
 			name = parsed[0]
-			if len(parsed) == 1:
+			if len(parsed) == 1 or parsed[1] == "":
 				try:
 					return db[name]
 				except Exception as e:
