@@ -27,9 +27,13 @@ def main():
     ipf.write(p[0])
     ipf.close()
 
+    baidu_ip = requests.get("http://www.baidu.com/s?wd=ip").text
+    ip_filter = re.compile("[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+")
+    ip_out = re.findall(ip_filter, baidu_ip)[0]
+
     server_addr = "http://"+config['server']+":"+str(config['port'])
     if old_p != p[0]:
-        requests.post(server_addr, data=json.dumps({config['machine_name']: {"ip": p[0], "if": ifconfig}}))
+        requests.post(server_addr, data=json.dumps({config['machine_name']: {"ip": p[0], "ipo": ip_out "if": ifconfig}}))
         old_p = p[0]
 
 if __name__ == "__main__":
