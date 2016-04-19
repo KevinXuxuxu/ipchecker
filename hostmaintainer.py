@@ -33,8 +33,8 @@ def main():
 
 if __name__ == "__main__":
 	while True:
-		# try:
-		main()
-		time.sleep(config["timeout"])
-		# except Exception as e:
-			# print e
+		try:
+			main()
+			time.sleep(config["timeout"])
+		except Exception as e:
+			print e
