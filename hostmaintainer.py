@@ -37,4 +37,4 @@ if __name__ == "__main__":
 			main()
 			time.sleep(config["timeout"])
 		except Exception as e:
-			print e
+			print time.ctime() + ": " + e

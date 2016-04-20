@@ -28,7 +28,7 @@ def main():
     ipf.close()
 
     baidu_ip = requests.get("http://www.baidu.com/s?wd=ip").text
-    ip_filter = re.compile("[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+")
+    ip_filter = re.compile("\&nbsp;([0-9]+\.[0-9]+\.[0-9]+\.[0-9]+)")
     ip_out = re.findall(ip_filter, baidu_ip)[0]
 
     server_addr = "http://"+config['server']+":"+str(config['port'])
@@ -42,4 +42,4 @@ if __name__ == "__main__":
             main()
             time.sleep(config["timeout"])
         except Exception as e:
-            print e
+            print time.ctime() + ": " + e
